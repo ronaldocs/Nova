@@ -65,7 +65,7 @@ INNER JOIN baandb.twhinr140301 whinr140
                     a.t$cwar,
                     sum(a.t$qana) quan
                from baandb.twhinp100301 a
-              where a.t$koor = 3
+              where a.t$koor in (3, 36)
                 and a.t$kotr = 2
                 and a.t$cdis$c = ' '
            group by a.t$item,
@@ -108,7 +108,7 @@ INNER JOIN baandb.ttcmcs003301 tcmcs003
         ON Q1.t$item = whinr140.t$item 
        AND Q1.t$cadr = tcmcs003.t$cadr 
                  
- LEFT JOIN ( select whwmd630.t$item,  
+ LEFT JOIN ( select whwmd630.t$item, 
                     whwmd630.t$cwar, 
                     whwmd630.t$loca,
                     sum(whwmd630.t$qbls) bloc 
@@ -119,19 +119,19 @@ INNER JOIN baandb.ttcmcs003301 tcmcs003
                                     AND tcmcs095.t$sumd = 0  
                                     AND tcmcs095.t$prcd = 9999 
                                     AND tcmcs095.t$koda = whwmd630.t$bloc ) 
-           group by whwmd630.t$item,  
+           group by whwmd630.t$item, 
                     whwmd630.t$cwar,
                     whwmd630.t$loca ) Q2  
         ON Q2.t$item = whinr140.t$item  
        AND Q2.t$cwar = whinr140.t$cwar
        AND Q2.t$loca = whinr140.t$loca
        
- LEFT JOIN ( select whinh220.t$item,  
-                    whinh220.t$cwar,  
+ LEFT JOIN ( select whinh220.t$item, 
+                    whinh220.t$cwar, 
                     sum(whinh220.t$qord) roma 
                from baandb.twhinh220301 whinh220 
               where whinh220.t$wmss = 40 
-           group by whinh220.t$item,  
+           group by whinh220.t$item, 
                     whinh220.t$cwar ) Q3  
         ON Q3.t$item = whinr140.t$item  
        AND Q3.t$cwar = whinr140.t$cwar 
@@ -171,21 +171,21 @@ INNER JOIN baandb.tznmcs032301 znmcs032
                 ELSE   'WN' 
             END,
            tcmcs003.t$tpar$l,
-           Trim(tcibd001.t$item),  
-           tcibd001.t$dsca,  
-           tcibd001.t$csig,  
+           Trim(tcibd001.t$item), 
+           tcibd001.t$dsca, 
+           tcibd001.t$csig, 
            tcibd001.t$citg, 
            tcmcs023.t$dsca, 
-           tcibd001.t$seto$c,  
-           znmcs030.t$dsca$c,  
-           tcibd001.t$fami$c,   
-           znmcs031.t$dsca$c,  
-           tcibd001.t$subf$c,  
-           znmcs032.t$dsca$c,  
+           tcibd001.t$seto$c, 
+           znmcs030.t$dsca$c, 
+           tcibd001.t$fami$c, 
+           znmcs031.t$dsca$c, 
+           tcibd001.t$subf$c, 
+           znmcs032.t$dsca$c, 
            tcemm030.t$euca, 
            tcemm030.T$EUNT, 
-           tccom130.t$fovn$l,  
-           tccom100.t$nama,  
+           tccom130.t$fovn$l, 
+           tccom100.t$nama, 
            tccom100.t$seak,
            whwmd400.t$hght, 
            whwmd400.t$wdth, 
@@ -253,7 +253,7 @@ INNER JOIN baandb.twhwmd630301 whwmd630
                     a.t$cdis$c,
                     sum(a.t$qana) quan
                from baandb.twhinp100301 a
-              where a.t$koor = 3
+              where a.t$koor in (3, 36)
                 and a.t$kotr = 2
            group by a.t$item,
                     a.t$cwar,
@@ -320,22 +320,22 @@ INNER JOIN baandb.tznmcs032301 znmcs032
       AND whwmd630.t$bloc IN (:TipRestricao)
       AND tcmcs003.t$tpar$l IN (:TipoArmazem)
 
-  GROUP BY Trim(tcibd001.t$item),  
-           tcibd001.t$dsca,  
-           tcibd001.t$csig,  
+  GROUP BY Trim(tcibd001.t$item), 
+           tcibd001.t$dsca, 
+           tcibd001.t$csig, 
            tcibd001.t$citg, 
-           tcmcs023.t$dsca,  
-           tcibd001.t$seto$c,  
-           znmcs030.t$dsca$c,  
-           tcibd001.t$fami$c,   
-           znmcs031.t$dsca$c,  
-           tcibd001.t$subf$c,  
-           znmcs032.t$dsca$c,  
+           tcmcs023.t$dsca, 
+           tcibd001.t$seto$c, 
+           znmcs030.t$dsca$c, 
+           tcibd001.t$fami$c, 
+           znmcs031.t$dsca$c, 
+           tcibd001.t$subf$c, 
+           znmcs032.t$dsca$c, 
            tcemm030.t$euca, 
            tcemm030.T$EUNT, 
-           whwmd630.t$bloc,  
-           tccom130.t$fovn$l,  
-           tccom100.t$nama,  
+           whwmd630.t$bloc, 
+           tccom130.t$fovn$l, 
+           tccom100.t$nama, 
            tccom100.t$seak,
            whwmd400.t$hght, 
            whwmd400.t$wdth, 
